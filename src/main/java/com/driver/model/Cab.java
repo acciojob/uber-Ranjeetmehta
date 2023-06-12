@@ -1,39 +1,62 @@
 package com.driver.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+
 @Entity
-public class Admin {
+@Table(name = "cab")
+public class Cab {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer adminId;
+    private int Id;
+    private int perKmRate;
+    private boolean Available;
+    @OneToOne
+    @JoinColumn
+    private Driver driver;
 
-    private String username;
-    private String password;
-
-    public Integer getAdminId() {
-        return adminId;
+    public Driver getDriver() {
+        return driver;
     }
 
-    public void setAdminId(Integer adminId) {
-        this.adminId = adminId;
+    public void setDriver(Driver driver) {
+        this.driver = driver;
     }
 
-    public String getUsername() {
-        return username;
+    public Cab() {
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public Cab(int perKmRate, boolean available) {
+        this.perKmRate = perKmRate;
+        this.Available = available;
     }
 
-    public String getPassword() {
-        return password;
+    public Cab(int id, int perKmRate, boolean available, Driver driver) {
+        Id = id;
+        this.perKmRate = perKmRate;
+        Available = available;
+        this.driver = driver;
+    }
+    public int getId() {
+        return Id;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setId(int id) {
+        Id = id;
+    }
+
+    public int getPerKmRate() {
+        return perKmRate;
+    }
+
+    public void setPerKmRate(int perKmRate) {
+        this.perKmRate = perKmRate;
+    }
+
+    public boolean getAvailable() {
+        return Available;
+    }
+
+    public void setAvailable(boolean available) {
+        this.Available = available;
     }
 }
